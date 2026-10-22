@@ -1,0 +1,142 @@
+{
+  "updated": "2026-09-29",
+  "headline": "Church 2012 is a density and history reference, not an accuracy target. It recovered 5.27 Mbit with 10 bit errors, no error-correcting code, and about 3000x read coverage. Codecs that combine an outer Reed-Solomon or fountain code with read clustering recover data exactly at far lower coverage and higher error rates.",
+  "church_reference": {
+    "bits_per_nt": 1.0,
+    "oligo": "159 nt = 96 nt data + 19 nt address + 2 x 22 nt primers",
+    "data": "5.27 Mbit in 54,898 oligos",
+    "errors": "10 bit errors, mostly in homopolymer runs at oligo ends with single coverage",
+    "coverage": "about 3000x average",
+    "ecc": "none (redundancy came from many physical copies)"
+  },
+  "codecs": [
+    {
+      "name": "Church et al. 2012",
+      "in_platform": "church",
+      "platform_status": "implemented",
+      "year": 2012,
+      "bits_per_nt": "1.0",
+      "ecc": "None",
+      "handles_indels": "No",
+      "reported_result": "10 bit errors in 5.27 Mbit at ~3000x coverage",
+      "vs_church": "Reference",
+      "source": {"title": "Next-generation digital information storage in DNA (Science)", "url": "https://arep.med.harvard.edu/pdf/Church_Science_12.pdf"}
+    },
+    {
+      "name": "Goldman et al. 2013",
+      "in_platform": "goldman",
+      "platform_status": "simplified",
+      "year": 2013,
+      "bits_per_nt": "~1.58 trits-based, /4 with 4x overlap",
+      "ecc": "4x overlapping fragments + parity trit",
+      "handles_indels": "Detects only",
+      "reported_result": "739 kB reconstructed with 100% accuracy; one file needed manual correction",
+      "vs_church": "Exact recovery, but in the 2026 benchmark it failed to decode under low-fidelity synthesis",
+      "source": {"title": "Towards practical, high-capacity, low-maintenance information storage in synthesized DNA (Nature)", "url": "https://pubmed.ncbi.nlm.nih.gov/23354052/"}
+    },
+    {
+      "name": "Grass et al. 2015 / DNA-RS (Heckel)",
+      "in_platform": "church|yinyang|raw2bit + Reed-Solomon outer code",
+      "platform_status": "simplified (RS outer + CRC inner, not the original inner RS)",
+      "year": 2015,
+      "bits_per_nt": "depends on code rate",
+      "ecc": "Reed-Solomon (outer and inner)",
+      "handles_indels": "Via dropout/erasure only",
+      "reported_result": "Text retrieved error-free after accelerated aging at 60-70 C for up to a month in silica",
+      "vs_church": "Better: error-free with an explicit code. DNA-RS was a top performer in the 2026 benchmark, best under low-fidelity synthesis",
+      "source": {"title": "ETH Zurich press release on Grass et al. 2015 (EurekAlert)", "url": "https://www.eurekalert.org/news-releases/870073"}
+    },
+    {
+      "name": "DNA Fountain (Erlich & Zielinski 2017)",
+      "in_platform": "fountain",
+      "platform_status": "simplified",
+      "year": 2017,
+      "bits_per_nt": "1.57 (as cited by Ping et al. 2022)",
+      "ecc": "LT fountain code + per-droplet check, GC/homopolymer screening",
+      "handles_indels": "No (droplet discarded)",
+      "reported_result": "High density; volatile recovery above ~1.7% sequence loss (Ping et al. 2022)",
+      "vs_church": "Denser; failed to decode in the 2026 low-fidelity scenario",
+      "source": {"title": "DNA Fountain enables a robust and efficient storage architecture (Science)", "url": "https://www.science.org/doi/10.1126/science.aaj2038"}
+    },
+    {
+      "name": "Organick et al. 2018 (random access)",
+      "in_platform": "architecture idea: per-file primers",
+      "platform_status": "future_work",
+      "year": 2018,
+      "bits_per_nt": "n/a",
+      "ecc": "Reed-Solomon + read-efficient decoding",
+      "handles_indels": "Yes, via consensus",
+      "reported_result": "200 MB, 35 files, >13 million oligos, each file recovered with no errors via primer-based random access",
+      "vs_church": "Far larger scale, error-free, random access",
+      "source": {"title": "Random access in large-scale DNA data storage (Nature Biotechnology)", "url": "https://www.nature.com/articles/nbt.4079"}
+    },
+    {
+      "name": "HEDGES (Press et al. 2020)",
+      "in_platform": "hedges",
+      "platform_status": "future_work",
+      "year": 2020,
+      "bits_per_nt": "variable code rate",
+      "ecc": "Hash-based inner code correcting indels + outer RS",
+      "handles_indels": "Yes, in a single read",
+      "reported_result": "Corrects up to ~10% nucleotide errors at low code rates; 7.7% basic error tolerance in the 2026 benchmark, weaker on dropout",
+      "vs_church": "Much higher per-read error tolerance",
+      "source": {"title": "An Indel-Resistant Error-Correcting Code for DNA-Based Information Storage (arXiv)", "url": "https://arxiv.org/abs/1812.01112"}
+    },
+    {
+      "name": "Yin-Yang codec (Ping et al. 2022)",
+      "in_platform": "yinyang",
+      "platform_status": "simplified",
+      "year": 2022,
+      "bits_per_nt": "1.75-1.78",
+      "ecc": "Relies on outer code / redundancy; constraint screening",
+      "handles_indels": "No",
+      "reported_result": "99.9% recovery above 10^4 molecule copies, ~71% at 10^2 copies",
+      "vs_church": "Denser and constraint-compliant; failed in the 2026 low-fidelity scenario",
+      "source": {"title": "Towards practical and robust DNA-based data archiving using the yin-yang codec system (Nature Computational Science)", "url": "https://www.nature.com/articles/s43588-022-00231-2"}
+    },
+    {
+      "name": "DNA-Aeon (Welzel et al. 2023)",
+      "in_platform": "dna_aeon",
+      "platform_status": "future_work",
+      "year": 2023,
+      "bits_per_nt": "flexible",
+      "ecc": "Arithmetic-coding inner code + Raptor fountain outer code",
+      "handles_indels": "Yes",
+      "reported_result": "100% decoding up to 7% substitution and 6.5% mixed error rates; 4.8 KB file in 33,516 nt vs 53,550 (HEDGES) and 84,134 (Grass)",
+      "vs_church": "Best overall in the 2026 six-codec benchmark alongside DNA-RS",
+      "source": {"title": "DNA-Aeon provides flexible arithmetic coding for constraint adherence and error correction (Nature Communications)", "url": "https://www.nature.com/articles/s41467-023-36297-3"}
+    },
+    {
+      "name": "Gungnir (2026)",
+      "in_platform": "none",
+      "platform_status": "not reviewed",
+      "year": 2026,
+      "bits_per_nt": "not read",
+      "ecc": "not read",
+      "handles_indels": "not read",
+      "reported_result": "Page could not be read (rate-limited); listed by title only",
+      "vs_church": "unknown",
+      "source": {"title": "Gungnir codec enabling high error-tolerance and low-redundancy DNA storage (Nature Communications)", "url": "https://www.nature.com/articles/s41467-026-71485-x"}
+    }
+  ],
+  "benchmark_2026": {
+    "title": "Comparison of state-of-the-art error-correction coding for sequence-based DNA data storage (Gimpel et al., Nature Communications, March 2026)",
+    "url": "https://www.nature.com/articles/s41467-026-70548-3",
+    "findings": [
+      "Six codecs compared: DNA-Aeon, DNA Fountain, DNA-RS, Goldman, HEDGES, Yin-Yang, in silico and in vitro.",
+      "Codecs tolerated up to 14% errors and 65% sequence loss in isolation.",
+      "DNA-Aeon and DNA-RS were the strongest overall; DNA-RS was best under low-fidelity synthesis.",
+      "DNA Fountain, Goldman and Yin-Yang could not decode in the low-fidelity (1.5% error) scenario.",
+      "Read clustering improved every codec, more than doubling error tolerance."
+    ]
+  },
+  "related_platforms": [
+    {"name": "DT4DDS (ETH Zurich)", "what": "Open-source digital twin of the DNA storage workflow, built from 40 sequencing experiments; models synthesis, PCR, decay and Illumina errors; has a web front-end.", "url": "https://www.nature.com/articles/s41467-023-41729-1"},
+    {"name": "UNACORM (arXiv 2608.09673, Aug 2026)", "what": "Web app benchmarking 8 codecs on density, recovery, runtime and cost; finds no single codec optimal. Reimplemented codecs not validated against originals.", "url": "https://pith.science/paper/2608.09673"}
+  ],
+  "channel_presets": [
+    {"name": "High-fidelity (DT4DDS-informed)", "sub": 0.0018, "ins": 0.0001, "del": 0.0006, "note": "Illumina substitutions ~1.8e-3/nt; material-deposition synthesis ~0.58e-3/nt, deletion-dominated"},
+    {"name": "Low-fidelity (DT4DDS-informed)", "sub": 0.0018, "ins": 0.0010, "del": 0.0125, "note": "Electrochemical synthesis ~13.5e-3 errors/nt, deletion-dominated; the ins/del split is our assumption"},
+    {"name": "Stress 5%", "sub": 0.03, "ins": 0.01, "del": 0.01, "note": "Synthetic stress test, not a measured channel"}
+  ]
+}

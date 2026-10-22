@@ -1,0 +1,33 @@
+# Environment & secrets
+.env
+.env*.local
+.env.*
+!.env.example
+
+# Backend data & databases
+backend/data/
+*.db
+*.sqlite3
+
+# Python
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+**/.venv/
+**/venv/
+ENV/
+env/
+
+# Node / Frontend
+**/node_modules/
+**/dist/
+frontend/dist/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db

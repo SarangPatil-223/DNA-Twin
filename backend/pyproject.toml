@@ -1,0 +1,32 @@
+[project]
+name = "dna-twin"
+version = "0.2.0"
+description = "Software-only digital twin of DNA data storage with an LLM knowledge base (simulation only)"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+  "python-multipart>=0.0.9",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "psycopg[binary]>=3.1",
+  "qdrant-client>=1.10",
+  "reedsolo>=1.7",
+  "rapidfuzz>=3.6",
+  "pillow>=10",
+  "scikit-image>=0.22",
+  "pypdf>=4",
+  "pytesseract>=0.3.10",
+  "reportlab>=4",
+  "matplotlib>=3.8",
+  "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+local-embeddings = ["sentence-transformers>=2.7"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

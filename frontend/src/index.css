@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; }
+body { @apply bg-paper text-ink font-body antialiased; }
+
+/* Archivo Black has a single weight: stop browsers faking bold on top of it */
+h1, h2, h3, .font-display { font-family: "Archivo Black", "Arial Black", sans-serif; font-weight: 400 !important; font-synthesis: none; }
+h1, h2, h3 { @apply text-ink uppercase; letter-spacing: -0.01em; line-height: 1; }
+a { @apply text-brand-deep underline-offset-4; }
+:focus-visible { outline: 3px solid #2E9E5B; outline-offset: 1px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-mono text-[12px] font-semibold uppercase tracking-[0.06em] transition-colors disabled:cursor-not-allowed disabled:opacity-40; }
+  .btn-primary { @apply btn bg-ink text-paper hover:bg-brand; }
+  .btn-brand { @apply btn bg-brand text-white hover:bg-ink; }
+  .btn-ghost { @apply btn border-[1.5px] border-ink bg-transparent text-ink hover:bg-ink hover:text-paper; }
+  .panel { @apply rounded-xl border-[1.5px] border-ink bg-white p-5; }
+  .field { @apply w-full rounded-lg border-[1.5px] border-ink bg-white px-3 py-2 font-mono text-[13px] text-ink; }
+  .label { @apply mb-2 block font-mono text-[11px] uppercase tracking-[0.1em] text-soft; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .mono-label { @apply font-mono text-[10px] uppercase tracking-[0.06em] text-soft; }
+  table thead { @apply font-mono text-[10px] uppercase tracking-[0.06em]; }
+}
+
+input[type="range"] { accent-color: #2E9E5B; }
+.scratch-canvas { touch-action: none; cursor: crosshair; }
+
+.font-display { text-transform: uppercase; letter-spacing: -0.01em; }
